@@ -1,0 +1,3 @@
+[submodule "ds-sim"]
+	path = ds-sim
+	url = https://github.com/distsys-MQ/ds-sim/
