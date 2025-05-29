@@ -50,9 +50,11 @@ def atl_scheduling():
             send("OK")
             receive()
 
-            server = get_most_cores_server()
-            schedule(job, server)
-            receive() 
+            servers = get_capable_servers(job)
+            if (len(servers)>0):
+                server = get_most_cores_server(servers)
+                schedule(job, server)
+                receive()
 
         else:
             continue
@@ -60,28 +62,38 @@ def atl_scheduling():
     send("QUIT")
     receive()
 
+def get_capable_servers(job):
+    send(f'GETS Capable {job["cores"]} {job["memory"]} {job["disk"]}')
+    _ = receive()
+    send('OK')
+    servers = receive().split('\n')
+    servers = [s.strip() for s in servers]
+    send('OK')
+    receive()
+    servers = list(map(build_server,servers))
+    return servers
 
-def get_most_cores_server():
+
+def get_most_cores_server(servers):
     max_cores = -1
     index_server=-1
-    send("GETS All")
-    data = receive()
-    send("OK")
-    servers=receive().split('\n')
-    send("OK")
-    receive()
-    servers = [s.strip() for s in servers]
     for i in range(len(servers)):
-        cores = int(servers[i].split(' ')[4])
+        cores = servers[i]['cores']
         if cores>max_cores:
             max_cores = cores
             index_server=i
-    return build_server(servers[index_server])
+    return servers[index_server]
 
 def build_server(server_str):
-    keys = ["type", "id", "state", "curStartTime", "core", "memory", "disk", "wJobs", "rJobs"]
+    keys = ["type", "id", "state", "curStartTime", "cores", "memory", "disk", "wJobs", "rJobs"]
     parts = server_str.strip().split()
-    return {key: val for key, val in zip(keys, parts)}
+    result = {}
+    for key, val in zip(keys, parts):
+        if key in ["id", "curStartTime", "cores", "memory", "disk", "wJobs", "rJobs"]:
+            result[key] = int(val)
+        else:
+            result[key] = val
+    return result
 
 def build_job(job_str):
     keys = ["id","submit_time", "cores", "memory", "disk", "est_runtime"]
