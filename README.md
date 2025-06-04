@@ -1,5 +1,10 @@
-**How to use the client**
--The client is in the ds-test directory and communicates using port number 50000. 
--The client can be run with the python3 client.py command.
+## 📡 How to Use the Client
 
-Only the Socket library from python is required for running the client.
+The client is located in the `ds-test` directory and communicates with the server via **port 50000**.
+
+### ▶️ Running the Client
+
+To run the client, navigate to the `ds-test` directory and execute:
+
+```bash
+python3 client.py
