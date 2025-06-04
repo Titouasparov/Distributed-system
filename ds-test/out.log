@@ -1,0 +1,126 @@
+# ds-sim server 4-Apr, 2025 @ MQ - client-server
+# Server-side simulator started with './ds-server -n -p 50000 -c TestConfigs/myconfig.xml -v brief'
+# Waiting for connection to port 50000 of IP address 127.0.0.1
+RCVD HELO
+SENT OK
+RCVD AUTH titouan
+# Welcome  titouan!
+# The system information can be read from 'ds-system.xml'
+SENT OK
+RCVD REDY
+t 5: job 0 -- CPU: 1, Mem: 400, Disk: 1500, Est Runtime: 455 SUBMITTED
+     SENT JOBN 0 5 1 400 1500 455
+     RCVD REDY
+     job 0 -- CPU: 1, Mem: 400, Disk: 1500, Est Runtime: 455 SUBMITTED
+     SENT JOBN 0 5 1 400 1500 455
+     SENT JOBN 0 5 1 400 1500 455
+
+     RCVD SCHD 0 tiny 0
+     job 0 (waiting) on tiny 0 (booting) SCHEDULED
+     SENT OK
+     RCVD REDY
+t 29: job 1 -- CPU: 1, Mem: 600, Disk: 1800, Est Runtime: 3248 SUBMITTED
+      SENT JOBN 1 29 1 600 1800 3248
+      SENT JOBN 1 29 1 600 1800 3248
+
+      RCVD SCHD 1 small 0
+      job 1 (waiting) on small 0 (booting) SCHEDULED
+      SENT OK
+      RCVD REDY
+t 45: job 0 on tiny 0 RUNNING
+t 68: job 2 -- CPU: 1, Mem: 1000, Disk: 600, Est Runtime: 795 SUBMITTED
+      SENT JOBN 2 68 1 1000 600 795
+      SENT JOBN 2 68 1 1000 600 795
+
+      RCVD SCHD 2 medium 0
+      job 2 (waiting) on medium 0 (booting) SCHEDULED
+      SENT OK
+      RCVD REDY
+t 89: job 1 on small 0 RUNNING
+t 96: job 3 -- CPU: 2, Mem: 1200, Disk: 3200, Est Runtime: 2224 SUBMITTED
+      SENT JOBN 3 96 2 1200 3200 2224
+      SENT JOBN 3 96 2 1200 3200 2224
+
+      SENT OK
+      RCVD REDY
+t 110: job 4 -- CPU: 1, Mem: 900, Disk: 900, Est Runtime: 1620 SUBMITTED
+       SENT JOBN 4 110 1 900 900 1620
+       SENT JOBN 4 110 1 900 900 1620
+
+       RCVD SCHD 4 small 0
+       job 4 (running) on small 0 (active) SCHEDULED
+       job 4 on small 0 RUNNING
+       SENT OK
+       RCVD REDY
+t 128: job 2 on medium 0 RUNNING
+t 748: job 5 -- CPU: 2, Mem: 500, Disk: 1900, Est Runtime: 2330 SUBMITTED
+       SENT JOBN 5 748 2 500 1900 2330
+       SENT JOBN 5 748 2 500 1900 2330
+
+       RCVD SCHD 5 medium 0
+       job 5 (running) on medium 0 (active) SCHEDULED
+       job 5 on medium 0 RUNNING
+       SENT OK
+       RCVD REDY
+t 808: job 2 on medium 0 COMPLETED
+       SENT JCPL 808 2 medium 0
+       SENT OK
+       RCVD SCHD 3 medium 0
+       job 3 (running) on medium 0 (active) SCHEDULED
+       job 3 on medium 0 RUNNING
+       SENT OK
+       RCVD REDY
+t 2232: job 5 on medium 0 COMPLETED
+        SENT JCPL 2232 5 medium 0
+        RCVD REDY
+t 2417: job 6 -- CPU: 4, Mem: 4300, Disk: 1100, Est Runtime: 521 SUBMITTED
+        SENT JOBN 6 2417 4 4300 1100 521
+        SENT JOBN 6 2417 4 4300 1100 521
+
+        SENT OK
+        RCVD REDY
+t 2418: job 1 on small 0 COMPLETED
+        SENT JCPL 2418 1 small 0
+        RCVD REDY
+t 2460: job 4 on small 0 COMPLETED
+        SENT JCPL 2460 4 small 0
+        RCVD REDY
+t 2468: job 0 on tiny 0 COMPLETED
+        SENT JCPL 2468 0 tiny 0
+        RCVD REDY
+t 2546: job 7 -- CPU: 1, Mem: 200, Disk: 1400, Est Runtime: 2 SUBMITTED
+        SENT JOBN 7 2546 1 200 1400 2
+        SENT JOBN 7 2546 1 200 1400 2
+
+        RCVD SCHD 7 tiny 0
+        job 7 (running) on tiny 0 (active) SCHEDULED
+        job 7 on tiny 0 RUNNING
+        SENT OK
+        RCVD REDY
+        RCVD REDY
+t 3173: job 7 on tiny 0 COMPLETED
+        SENT JCPL 3173 7 tiny 0
+        RCVD REDY
+        RCVD REDY
+t 3232: job 3 on medium 0 COMPLETED
+        SENT JCPL 3232 3 medium 0
+        SENT OK
+        RCVD SCHD 6 medium 0
+        job 6 (running) on medium 0 (active) SCHEDULED
+        job 6 on medium 0 RUNNING
+        SENT OK
+        RCVD REDY
+t 3735: job 6 on medium 0 COMPLETED
+        SENT JCPL 3735 6 medium 0
+        RCVD REDY
+        SENT NONE
+        RCVD QUIT
+        SENT QUIT
+# -------------------------------------------------------------------------------------
+# 1 tiny servers used with a utilisation of 97.51 at the cost of $0.09
+# 1 small servers used with a utilisation of 100.00 at the cost of $0.13
+# 1 medium servers used with a utilisation of 100.00 at the cost of $0.40
+# ==================================== [ Summary ] ====================================
+# actual simulation end time: 3735, #jobs: 8 (failed 0 times)
+# total #servers used: 3, avg util: 99.17% (ef. usage: 99.14%), total cost: $0.62
+# avg waiting time: 210, avg exec time: 1602, avg turnaround time: 1812
